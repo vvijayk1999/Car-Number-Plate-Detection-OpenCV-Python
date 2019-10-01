@@ -11,16 +11,16 @@ image = imutils.resize(image, width=500)
 # Display the original image
 cv2.imshow("Original Image", image)
 
-# RGB to Gray scale conversion
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-cv2.imshow("1 - Grayscale Conversion", gray)
+# Inverting the Image
+inv = cv2.bitwise_not(image)
+cv2.imshow("1 - Inverting the image", inv)
 
 # Noise removal with iterative bilateral filter(removes noise while preserving edges)
-gray = cv2.bilateralFilter(gray, 11, 17, 17)
-cv2.imshow("2 - Bilateral Filter", gray)
+gray = cv2.bilateralFilter(inv, 20, 30, 30)
+cv2.imshow("2 - Bilateral Filter", inv)
 
 # Find Edges of the grayscale image
-edged = cv2.Canny(gray, 170, 200)
+edged = cv2.Canny(inv, 170, 200)
 cv2.imshow("4 - Canny Edges", edged)
 
 # Find contours based on Edges
